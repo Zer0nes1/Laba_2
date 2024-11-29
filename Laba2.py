@@ -1,6 +1,14 @@
 import re
 import unittest
 
+def verify_ip(ip_value):
+    error_string = ""
+    the_name = "IPaddress"
+    
+    # Паттерн для валидации формата IP-адреса
+    ip_pattern = re.compile(r"^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$")
+    ip_match = ip_pattern.match(ip_value)
+    
 def menu():
     print("1. Проверить IP вручную")
     print("2. Проверить IP из файла")
