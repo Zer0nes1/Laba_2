@@ -24,6 +24,9 @@ def verify_ip(ip_value):
             if segment > 255:
                 error_string += f"{the_name}: {ip_value} недопустимый IP адрес."
                 break
+            
+    # Возвращаем результат
+    return error_string if error_string else "Введенный IP адрес корректный!"
 
 def menu():
     print("1. Проверить IP вручную")
