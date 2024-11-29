@@ -70,3 +70,31 @@ while(main != '2' ):
         print('До свидания!')
     else:
         print('Неверный ввод.')
+
+class TestVerifyIP(unittest.TestCase):
+    def test_valid_ip(self):
+        result = verify_ip("192.168.0.1")
+        self.assertEqual(result, "Введенный IP адрес корректный!")
+
+    def test_invalid_format(self):
+        result = verify_ip("999.999.999.9999")
+        self.assertIn("IPaddress: 999.999.999.9999 недопустимый IP адрес.", result)
+
+    def test_special_ip_zero(self):
+        result = verify_ip("0.0.0.0")
+        self.assertIn("IPaddress: 0.0.0.0 это специальный IP адрес и не может быть использован.", result)
+
+    def test_special_ip_broadcast(self):
+        result = verify_ip("255.255.255.255")
+        self.assertIn("IPaddress: 255.255.255.255 это специальный IP адрес и не может быть использован.", result)
+
+    def test_out_of_range_segment(self):
+        result = verify_ip("300.168.0.1")
+        self.assertIn("IPaddress: 300.168.0.1 недопустимый IP адрес.", result)
+
+    def test_empty_input(self):
+        result = verify_ip("")
+        self.assertIn("IPaddress:  недопустимый IP адрес.", result)
+
+if __name__ == "__main__":
+    unittest.main()
