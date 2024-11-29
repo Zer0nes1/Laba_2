@@ -24,9 +24,26 @@ def verify_ip(ip_value):
             if segment > 255:
                 error_string += f"{the_name}: {ip_value} недопустимый IP адрес."
                 break
-            
+
     # Возвращаем результат
     return error_string if error_string else "Введенный IP адрес корректный!"
+
+    #Чтение IP-адресов из файла и проверка каждого.
+def process_file(file_path):
+    
+    results = []
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                ip_value = line.strip()
+                if ip_value:  # Пропускаем пустые строки
+                    result = verify_ip(ip_value)
+                    results.append(f"{ip_value}: {result}")
+    except FileNotFoundError:
+        return ["Ошибка: Файл не найден."]
+    except Exception as e:
+        return [f"Ошибка: {e}"]
+    return results
 
 def menu():
     print("1. Проверить IP вручную")
