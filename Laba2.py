@@ -18,6 +18,12 @@ def verify_ip(ip_value):
     # Проверка формата и диапазона каждого сегмента
     if not ip_match:
         error_string += f"{the_name}: {ip_value} недопустимый IP адрес."
+    else:
+        for i in range(4):
+            segment = int(ip_match.group(i + 1))
+            if segment > 255:
+                error_string += f"{the_name}: {ip_value} недопустимый IP адрес."
+                break
 
 def menu():
     print("1. Проверить IP вручную")
