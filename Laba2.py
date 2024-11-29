@@ -9,6 +9,12 @@ def verify_ip(ip_value):
     ip_pattern = re.compile(r"^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$")
     ip_match = ip_pattern.match(ip_value)
     
+    # Проверка специальных IP-адресов
+    if ip_value == "0.0.0.0":
+        error_string += f"{the_name}: {ip_value} это специальный IP адрес и не может быть использован."
+    elif ip_value == "255.255.255.255":
+        error_string += f"{the_name}: {ip_value} это специальный IP адрес и не может быть использован."
+
 def menu():
     print("1. Проверить IP вручную")
     print("2. Проверить IP из файла")
